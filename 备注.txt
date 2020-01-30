@@ -1,0 +1,27 @@
+time series analysis, ARMA (Autoregressive Moving Average) 
+时间序列分析，ARMA模型
+
+1.中国银行股票的收盘价变化图.png
+这个序列似乎有很多随机性。从图上看，级数不稳定。
+
+ADF检验
+ADF检验就是判断序列是否存在单位根：如果序列平稳，就不存在单位根；否则，就会存在单位根
+结果：
+data:  train_close
+Dickey-Fuller = -2.1782, Lag order = 8, p-value = 0.5029
+alternative hypothesis: stationary
+
+
+From the p value, it was clear that the series was not stationary.
+The method used to stationarize the series was using the logged difference values.
+通过P值（ p-value = 0.5029），发现序列不稳定。使用diff(log(train$Close))函数使得序列变得稳定。
+
+新序列的ADF值：
+data:  nifty_ret
+Dickey-Fuller = -7.9354, Lag order = 8, p-value = 0.01
+alternative hypothesis: stationary
+通过P值（  p-value = 0.01），发现序列变得稳定
+
+预测的结果：
+arma.forecast 时间长度为11的时间序列
+arma.forecast 时间长度为3的时间徐磊
